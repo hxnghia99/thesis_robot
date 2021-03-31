@@ -1,0 +1,92 @@
+<launch>
+<group ns="rtabmap">
+	<!--include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+        <arg name="rtabmap_args"       value="delete_db_on_start"/>
+        <arg name="depth_topic"        value="/$(arg camera)/aligned_depth_to_color/image_raw"/>
+        <arg name="frame_id"           value="$(arg camera)_link"/>
+        <arg name="visual_odometry"    value="false"/>
+        <arg name="odom_topic"         value="/$(arg camera)/odom/sample"/>
+        <arg name="rgb_topic"          value="/$(arg camera)/color/image_raw"/>
+        <arg name="camera_info_topic"  value="/$(arg camera)/color/camera_info"/>
+        <arg name="queue_size"         value="200"/>
+        <arg name="approx_sync"		   value="true"/>		
+        <arg name="rviz"               value="$(arg use_rviz)"/>
+        <arg name="rtabmapviz"         value="$(arg use_rtabmapviz)"/>
+    </include-->
+	<node pkg="nodelet" type="nodelet" name="rgbd_sync" args="standalone rtabmap_ros/rgbd_sync" output="screen">
+      <remap from="rgb/image"       to="/camera/color/image_raw"/>
+      <remap from="depth/image"     to="/camera/depth/image_rect_raw"/>
+      <remap from="rgb/camera_info" to="/camera/color/camera_info"/>
+      <remap from="rgbd_image"      to="rgbd_image"/> <!-- output -->
+      
+      <!-- Should be true for not synchronized camera topics 
+           (e.g., false for kinectv2, zed, realsense, true for xtion, kinect360)-->
+      <param name="approx_sync"       value="true"/> 
+    </node>
+
+
+    <arg name="icp_odometry"             default="true"/>         <!-- Launch rtabmap icp odometry node -->
+    <arg name="odom_topic"               default="odom"/>          <!-- Odometry topic name -->
+    <arg name="vo_frame_id"              default="$(arg odom_topic)"/> <!-- Visual/Icp odometry frame ID for TF -->
+    <arg name="publish_tf_odom"          default="true"/>
+    <arg name="odom_tf_angular_variance" default="1"/>             <!-- If TF is used to get odometry, this is the default angular variance -->
+    <arg name="odom_tf_linear_variance"  default="1"/>             <!-- If TF is used to get odometry, this is the default linear variance -->
+    <arg name="odom_args"                default=""/>              <!-- More arguments for odometry (overwrite same parameters in rtabmap_args) -->
+    <arg name="odom_sensor_sync"         default="false"/>
+    <arg name="odom_guess_frame_id"        default=""/>
+    <arg name="odom_guess_min_translation" default="0"/>
+    <arg name="odom_guess_min_rotation"    default="0"/>
+    <arg name="odom_max_rate"            default="0"/>
+    <arg name="odom_expected_rate"       default="0"/>
+
+
+
+    <node if="$(arg icp_odometry)" pkg="rtabmap_ros" type="icp_odometry" name="icp_odometry" output="screen">
+      <remap from="scan"                   to="/scan"/>
+      <remap from="odom"                   to="odom"/>
+      
+      <param name="frame_id"                    type="string" value="lidar_link"/>
+      <param name="odom_frame_id"               type="string" value="odom"/>
+      <param name="publish_tf"                  type="bool"   value="true"/>
+      <param name="queue_size"                  type="int"    value="10"/>
+      <param name="guess_min_translation"       type="double" value="0"/>
+      <param name="guess_min_rotation"          type="double" value="0"/>
+      <param name="scan_cloud_max_points"       type="int"    value="0"/>
+      <param name="expected_update_rate"        type="double" value="0"/>
+      <param name="max_update_rate"             type="double" value="0"/>
+    </node>
+
+
+    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="--delete_db_on_start">
+          <param name="frame_id" type="string" value="base_link"/>
+
+          <param name="subscribe_depth" type="bool" value="false"/>
+          <param name="subscribe_rgbd" type="bool" value="true"/>
+          <param name="subscribe_scan" type="bool" value="false"/>
+
+          <remap from="odom" to="/odom"/>
+          <remap from="scan" to="/scan"/>
+          <remap from="rgbd_image" to="rgbd_image"/>
+
+          <param name="queue_size" type="int" value="10"/>
+
+          <!-- RTAB-Map's parameters -->
+          <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>
+          <param name="RGBD/ProximityBySpace"     type="string" value="true"/>
+          <param name="RGBD/AngularUpdate"        type="string" value="0.01"/>
+          <param name="RGBD/LinearUpdate"         type="string" value="0.01"/>
+          <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>
+          <param name="Grid/FromDepth"            type="string" value="false"/> <!-- occupancy grid from lidar -->
+          <param name="Reg/Force3DoF"             type="string" value="true"/>
+          <param name="Reg/Strategy"              type="string" value="1"/> <!-- 1=ICP -->
+          
+          <!-- ICP parameters -->
+          <param name="Icp/VoxelSize"                 type="string" value="0.05"/>
+          <param name="Icp/MaxCorrespondenceDistance" type="string" value="0.1"/>
+    </node>
+</group>
+
+<node name="tf_laser_scan" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /base_link /lidar_link 100"/>
+
+
+</launch>
