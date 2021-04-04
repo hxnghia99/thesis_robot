@@ -11,7 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   amcl
   map_server
   move_base
-  robot_bringup
+#  robot_bringup
   roscpp
   std_msgs
 )

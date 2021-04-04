@@ -14,7 +14,7 @@
 
   <!-- Lidar -->
   <include file="$(find thesis_robot_bringup)/launch/thesis_robot_rplidar.launch">
-    <arg name="set_frame_id" value="$(arg set_lidar_frame_id)"/>
+    <!--arg name="set_frame_id" value="$(arg set_lidar_frame_id)"/-->
   </include>
 
   <!-- Camera -->

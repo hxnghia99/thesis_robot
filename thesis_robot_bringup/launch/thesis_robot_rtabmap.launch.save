@@ -38,10 +38,10 @@
     <rosparam file="$(find thesis_robot_bringup)/param/move_base_params.yaml" command="load" />
     <rosparam file="$(find thesis_robot_bringup)/param/global_planner_params.yaml" command="load" />
     <rosparam file="$(find thesis_robot_bringup)/param/navfn_global_planner_params.yaml" command="load" />
-   
+    <!-- external params file that could be loaded into the move_base namespace -->
     <rosparam file="$(arg custom_param_file)" command="load" />
     
-   
+    <!-- reset frame_id parameters using user input data -->
     <param name="global_costmap/global_frame" value="$(arg global_frame_id)"/>
     <param name="global_costmap/robot_base_frame" value="$(arg base_frame_id)"/>
     <param name="local_costmap/global_frame" value="$(arg odom_frame_id)"/>
@@ -50,7 +50,7 @@
 
     <remap from="odom" to="$(arg odom_topic)"/>
     <remap from="scan" to="$(arg laser_topic)"/>
-  </node-->
+  </node>
 
 
 
@@ -111,9 +111,7 @@
       <param unless="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
       <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/> 
     </node>
-	
-    <node pkg="tf" type="static_transform_publisher" name="camera_optical_link" args="0 0 0 0 0 0 /base_footprint /camera_color_optical_frame 100"/>    
-   
+    
     <!-- Rviz visualization -->
     <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find robot_rtabmap)/rviz/robot_rtabmap.rviz"/>
     
