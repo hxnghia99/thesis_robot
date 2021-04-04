@@ -8,17 +8,17 @@
   <arg name="camera_enable"         default="true"/>
 
   <!-- Rosserial -->
-  <include file="$(find robot_bringup)/launch/robot_rosserial.launch">
+  <include file="$(find thesis_robot_bringup)/launch/robot_rosserial.launch">
     <arg name="multi_robot_name" value="$(arg multi_robot_name)"/>
   </include>
 
   <!-- Lidar -->
-  <include file="$(find robot_bringup)/launch/robot_lidar.launch">
+  <include file="$(find thesis_robot_bringup)/launch/robot_lidar.launch">
     <arg name="set_frame_id" value="$(arg set_lidar_frame_id)"/>
   </include>
 
   <!-- Camera -->
-  <include if="$(arg camera_enable)" file="$(find robot_bringup)/launch/robot_realsense.launch">
+  <include if="$(arg camera_enable)" file="$(find thesis_robot_bringup)/launch/robot_realsense.launch">
     <arg name="filters"             value="$(arg camera_filter)"/>
     <arg name="device_type"         value="$(arg camera_type)"/>
     <arg name="align_depth"         value="$(arg camera_align_depth)"/>
@@ -26,6 +26,6 @@
     <arg name="enable_infra2"       value="false"/>
   </include>
 
-  <node pkg="robot_bringup" type="robot_diagnostics" name="robot_diagnostics" output="screen"/>
+  <!--node pkg="thesis_robot_bringup" type="robot_diagnostics" name="robot_diagnostics" output="screen"/-->
 
 </launch>
