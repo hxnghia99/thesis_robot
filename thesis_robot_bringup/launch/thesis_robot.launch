@@ -7,14 +7,11 @@
   <arg name="camera_align_depth"    default="true"/>
   <arg name="camera_enable"         default="true"/>
 
+
+
   <!-- Rosserial -->
   <include file="$(find thesis_robot_bringup)/launch/thesis_robot_rosserial.launch">
-    <arg name="multi_robot_name" value="$(arg multi_robot_name)"/>
-  </include>
-
-  <!-- Lidar -->
-  <include file="$(find thesis_robot_bringup)/launch/thesis_robot_rplidar.launch">
-    <!--arg name="set_frame_id" value="$(arg set_lidar_frame_id)"/-->
+    <!--arg name="multi_robot_name" value="$(arg multi_robot_name)"/-->
   </include>
 
   <!-- Camera -->

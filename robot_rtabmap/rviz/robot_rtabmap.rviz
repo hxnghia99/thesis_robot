@@ -4,13 +4,16 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /TF1
+        - /TF1/Frames1
         - /TF1/Tree1
         - /Global Map1/Costmap1
         - /Global Map1/Planner1
         - /Local Map1/Costmap1
         - /Local Map1/Planner1
+        - /Image1
       Splitter Ratio: 0.5
-    Tree Height: 374
+    Tree Height: 127
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -18,7 +21,7 @@ Panels:
       - /2D Pose Estimate1
       - /2D Nav Goal1
     Name: Tool Properties
-    Splitter Ratio: 0.588679016
+    Splitter Ratio: 0.5886790156364441
   - Class: rviz/Views
     Expanded:
       - /Current View1
@@ -28,7 +31,9 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: camera_color
+    SyncSource: LaserScan
+Preferences:
+  PromptSaveOnExit: true
 Toolbars:
   toolButtonStyle: 2
 Visualization Manager:
@@ -40,7 +45,7 @@ Visualization Manager:
       Color: 160; 160; 164
       Enabled: true
       Line Style:
-        Line Width: 0.0299999993
+        Line Width: 0.029999999329447746
         Value: Lines
       Name: Grid
       Normal Cell Count: 0
@@ -71,30 +76,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        base_scan:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_depth_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_depth_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        caster_back_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        caster_front_link:
+        caster_wheel_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -103,12 +85,23 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        wheel_left_link:
+          Value: true
+        left_wheel_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        wheel_right_link:
+        lidar_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        realsense_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_wheel_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -125,11 +118,13 @@ Visualization Manager:
       Frames:
         All Enabled: false
         base_footprint:
-          Value: false
-        base_link:
-          Value: false
-        base_scan:
           Value: true
+        base_link:
+          Value: true
+        camera_accel_frame:
+          Value: false
+        camera_accel_optical_frame:
+          Value: false
         camera_aligned_depth_to_color_frame:
           Value: false
         camera_color_frame:
@@ -140,21 +135,23 @@ Visualization Manager:
           Value: false
         camera_depth_optical_frame:
           Value: false
+        camera_gyro_frame:
+          Value: false
+        camera_gyro_optical_frame:
+          Value: false
         camera_link:
           Value: false
-        caster_back_link:
-          Value: false
-        caster_front_link:
+        caster_wheel_link:
           Value: false
         imu_link:
+          Value: false
+        lidar_link:
           Value: false
         map:
           Value: false
         odom:
           Value: false
-        wheel_left_link:
-          Value: false
-        wheel_right_link:
+        realsense_link:
           Value: false
       Marker Scale: 3
       Name: TF
@@ -166,27 +163,16 @@ Visualization Manager:
           odom:
             base_footprint:
               base_link:
-                base_scan:
-                  {}
-                camera_link:
-                  camera_aligned_depth_to_color_frame:
-                    camera_color_optical_frame:
-                      {}
-                  camera_color_frame:
-                    {}
-                  camera_depth_frame:
-                    camera_depth_optical_frame:
-                      {}
-                caster_back_link:
-                  {}
-                caster_front_link:
+                caster_wheel_link:
                   {}
                 imu_link:
                   {}
-                wheel_left_link:
+                lidar_link:
                   {}
-                wheel_right_link:
+                realsense_link:
                   {}
+              camera_color_optical_frame:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -212,14 +198,14 @@ Visualization Manager:
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.0299999993
+      Size (m): 0.029999999329447746
       Style: Squares
       Topic: /scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
-    - Alpha: 0.699999988
+    - Alpha: 0.699999988079071
       Class: rviz/Map
       Color Scheme: map
       Draw Behind: false
@@ -231,7 +217,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Group
       Displays:
-        - Alpha: 0.699999988
+        - Alpha: 0.699999988079071
           Class: rviz/Map
           Color Scheme: costmap
           Draw Behind: true
@@ -246,11 +232,11 @@ Visualization Manager:
           Class: rviz/Path
           Color: 255; 0; 0
           Enabled: true
-          Head Diameter: 0.300000012
-          Head Length: 0.200000003
-          Length: 0.300000012
+          Head Diameter: 0.30000001192092896
+          Head Length: 0.20000000298023224
+          Length: 0.30000001192092896
           Line Style: Lines
-          Line Width: 0.0299999993
+          Line Width: 0.029999999329447746
           Name: Planner
           Offset:
             X: 0
@@ -258,9 +244,9 @@ Visualization Manager:
             Z: 0
           Pose Color: 255; 85; 255
           Pose Style: None
-          Radius: 0.0299999993
-          Shaft Diameter: 0.100000001
-          Shaft Length: 0.100000001
+          Radius: 0.029999999329447746
+          Shaft Diameter: 0.10000000149011612
+          Shaft Length: 0.10000000149011612
           Topic: /move_base/TrajectoryPlannerROS/global_plan
           Unreliable: false
           Value: true
@@ -268,7 +254,7 @@ Visualization Manager:
       Name: Global Map
     - Class: rviz/Group
       Displays:
-        - Alpha: 0.699999988
+        - Alpha: 0.699999988079071
           Class: rviz/Map
           Color Scheme: costmap
           Draw Behind: false
@@ -283,11 +269,11 @@ Visualization Manager:
           Class: rviz/Path
           Color: 0; 12; 255
           Enabled: true
-          Head Diameter: 0.300000012
-          Head Length: 0.200000003
-          Length: 0.300000012
+          Head Diameter: 0.30000001192092896
+          Head Length: 0.20000000298023224
+          Length: 0.30000001192092896
           Line Style: Lines
-          Line Width: 0.0299999993
+          Line Width: 0.029999999329447746
           Name: Planner
           Offset:
             X: 0
@@ -295,26 +281,26 @@ Visualization Manager:
             Z: 0
           Pose Color: 255; 85; 255
           Pose Style: None
-          Radius: 0.0299999993
-          Shaft Diameter: 0.100000001
-          Shaft Length: 0.100000001
+          Radius: 0.029999999329447746
+          Shaft Diameter: 0.10000000149011612
+          Shaft Length: 0.10000000149011612
           Topic: /move_base/TrajectoryPlannerROS/local_plan
           Unreliable: false
           Value: true
       Enabled: true
       Name: Local Map
     - Alpha: 1
-      Arrow Length: 0.200000003
-      Axes Length: 0.300000012
-      Axes Radius: 0.00999999978
+      Arrow Length: 0.20000000298023224
+      Axes Length: 0.30000001192092896
+      Axes Radius: 0.009999999776482582
       Class: rviz/PoseArray
       Color: 0; 192; 0
       Enabled: true
-      Head Length: 0.0700000003
-      Head Radius: 0.0299999993
+      Head Length: 0.07000000029802322
+      Head Radius: 0.029999999329447746
       Name: Amcl Particles
-      Shaft Length: 0.230000004
-      Shaft Radius: 0.00999999978
+      Shaft Length: 0.23000000417232513
+      Shaft Radius: 0.009999999776482582
       Shape: Arrow (Flat)
       Topic: /particlecloud
       Unreliable: false
@@ -332,7 +318,7 @@ Visualization Manager:
       Cloud from scan: false
       Cloud max depth (m): 4
       Cloud min depth (m): 0
-      Cloud voxel size (m): 0.0500000007
+      Cloud voxel size (m): 0.05000000074505806
       Color: 255; 255; 255
       Color Transformer: RGB8
       Download graph: false
@@ -350,7 +336,7 @@ Visualization Manager:
       Node filtering radius (m): 0
       Position Transformer: XYZ
       Size (Pixels): 5
-      Size (m): 0.00999999978
+      Size (m): 0.009999999776482582
       Style: Points
       Topic: /rtabmap/mapData
       Unreliable: false
@@ -358,7 +344,7 @@ Visualization Manager:
       Use rainbow: true
       Value: false
     - Class: rviz/Image
-      Enabled: true
+      Enabled: false
       Image Topic: /camera/color/image_raw
       Max Value: 1
       Median window: 5
@@ -368,17 +354,17 @@ Visualization Manager:
       Queue Size: 2
       Transport Hint: raw
       Unreliable: false
-      Value: true
+      Value: false
     - Alpha: 1
       Buffer Length: 4
       Class: rviz/Path
       Color: 25; 255; 0
       Enabled: true
-      Head Diameter: 0.300000012
-      Head Length: 0.200000003
-      Length: 0.300000012
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
       Line Style: Billboards
-      Line Width: 0.0299999993
+      Line Width: 0.029999999329447746
       Name: global path
       Offset:
         X: 0
@@ -386,9 +372,9 @@ Visualization Manager:
         Z: 0
       Pose Color: 255; 85; 255
       Pose Style: None
-      Radius: 0.0299999993
-      Shaft Diameter: 0.100000001
-      Shaft Length: 0.100000001
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
       Topic: /move_base/NavfnROS/plan
       Unreliable: false
       Value: true
@@ -397,11 +383,11 @@ Visualization Manager:
       Class: rviz/Path
       Color: 255; 0; 0
       Enabled: true
-      Head Diameter: 0.300000012
-      Head Length: 0.200000003
-      Length: 0.300000012
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
       Line Style: Billboards
-      Line Width: 0.0299999993
+      Line Width: 0.029999999329447746
       Name: local path
       Offset:
         X: 0
@@ -409,10 +395,22 @@ Visualization Manager:
         Z: 0
       Pose Color: 255; 85; 255
       Pose Style: None
-      Radius: 0.0299999993
-      Shaft Diameter: 0.100000001
-      Shaft Length: 0.100000001
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
       Topic: /move_base/TrajectoryPlannerROS/local_plan
+      Unreliable: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /camera/color/image_raw
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
       Unreliable: false
       Value: true
   Enabled: true
@@ -428,7 +426,10 @@ Visualization Manager:
       Hide Inactive Objects: true
     - Class: rviz/Select
     - Class: rviz/SetInitialPose
+      Theta std deviation: 0.2617993950843811
       Topic: /initialpose
+      X std deviation: 0.5
+      Y std deviation: 0.5
     - Class: rviz/SetGoal
       Topic: /move_base_simple/goal
     - Class: rviz/Measure
@@ -436,33 +437,35 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 11.9374981
+      Distance: 2.674548387527466
       Enable Stereo Rendering:
-        Stereo Eye Separation: 0.0599999987
+        Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 2.8669529
-        Y: -1.66254783
-        Z: -0.971937776
+        X: 0.08051050454378128
+        Y: 0.03214975446462631
+        Z: -0.5736360549926758
       Focal Shape Fixed Size: true
-      Focal Shape Size: 0.0500000007
+      Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
-      Near Clip Distance: 0.00999999978
-      Pitch: 1.04979682
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 1.1447964906692505
       Target Frame: base_footprint
       Value: Orbit (rviz)
-      Yaw: 3.67415237
+      Yaw: 3.2459681034088135
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1028
+  Height: 536
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd000000040000000000000185000003befc0200000008fb0000001200530065006c0065006300740069006f006e00000000280000009b0000006100fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000002800000205000000d700fffffffb0000001800630061006d006500720061005f0063006f006c006f00720100000233000001b30000001600fffffffb0000000a0049006d00610067006501000001dd000000bb0000000000000000fb0000001800630061006d006500720061005f0063006f006c006f00720100000249000000c00000000000000000000000010000010f000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000028000003da000000ad00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004a00000003efc0100000002fb0000000800540069006d00650000000000000004a00000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000005b4000003be00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Image:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd000000040000000000000185000001b8fc0200000009fb0000001200530065006c0065006300740069006f006e00000000280000009b0000005e00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001b500000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000000400000010f000000ce00fffffffb0000001800630061006d006500720061005f0063006f006c006f00720000000132000000c60000001800fffffffb0000000a0049006d00610067006501000001dd000000bb0000000000000000fb0000001800630061006d006500720061005f0063006f006c006f00720100000249000000c00000000000000000fb0000000a0049006d0061006700650100000155000000a30000001800ffffff000000010000010f000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000028000003da000000ac00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004a00000003efc0100000002fb0000000800540069006d00650000000000000004a00000025700fffffffb0000000800540069006d0065010000000000000450000000000000000000000275000001b800000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -471,8 +474,8 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 1855
-  X: 237
-  Y: 40
+  Width: 1024
+  X: 0
+  Y: 27
   camera_color:
     collapsed: false

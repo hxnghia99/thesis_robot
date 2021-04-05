@@ -1,4 +1,8 @@
 <launch>
+  
+  <arg name="rviz"  default="true"/>
+  <arg name="rtabmapviz"  default="false"/>
+  <arg name="gui_cfg"                 default="~/.ros/rtabmap_gui.ini" />
 
   <arg name="database_path"       default="rtabmap.db"/>
   <arg name="delete_db"           default="true"/>
@@ -115,7 +119,8 @@
     <node pkg="tf" type="static_transform_publisher" name="camera_optical_link" args="0 0 0 0 0 0 /base_footprint /camera_color_optical_frame 100"/>    
    
     <!-- Rviz visualization -->
-    <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find robot_rtabmap)/rviz/robot_rtabmap.rviz"/>
+    <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find robot_rtabmap)/rviz/robot_rtabmap.rviz"/>
+    
     
   </group>
 </launch>
