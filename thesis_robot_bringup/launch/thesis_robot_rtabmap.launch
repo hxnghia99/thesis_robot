@@ -115,8 +115,6 @@
       <param unless="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
       <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/> 
     </node>
-	
-    <node pkg="tf" type="static_transform_publisher" name="camera_optical_link" args="0 0 0 0 0 0 /base_footprint /camera_color_optical_frame 100"/>    
    
     <!-- Rviz visualization -->
     <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find robot_rtabmap)/rviz/robot_rtabmap.rviz"/>

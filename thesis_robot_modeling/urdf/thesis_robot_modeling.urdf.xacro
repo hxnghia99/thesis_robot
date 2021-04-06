@@ -10,7 +10,7 @@
   <joint name="base_joint" type="fixed">
     <parent link="base_footprint"/>
     <child link="base_link"/>
-    <origin xyz="0 0 0.1" rpy="0 0 3.14"/>
+    <origin xyz="0 0 0.1" rpy="0 0 0"/>
   </joint>
 
 
@@ -170,7 +170,7 @@
 
 
   <joint name="lidar_joint" type="fixed">
-    <origin xyz="-0.01 0 0.335" rpy="0 0 0" />
+    <origin xyz="-0.01 0 0.335" rpy="0 0 3.14" />
     <parent link="base_link" />
     <child link="lidar_link" />
   </joint>
@@ -190,7 +190,7 @@
     </inertial>
 
     <visual>
-      <origin xyz="0.01 0 -0.785" rpy="1.57 0 1.57" />
+      <origin xyz="-0.01 0 -0.785" rpy="1.57 0 -1.57" />
       <geometry>
         <mesh filename="package://thesis_robot_modeling/meshes/lidar_link.STL" />
       </geometry>
@@ -200,7 +200,7 @@
     </visual>
 
     <collision>
-      <origin xyz="0 0 0" rpy="1.57 0 -1.57" />
+      <origin xyz="-0.01 0 -0.785" rpy="1.57 0 -1.57" />
       <geometry>
         <mesh filename="package://thesis_robot_modeling/meshes/lidar_link.STL" />
       </geometry>
@@ -210,7 +210,7 @@
 
 
   <joint name="realsense_joint" type="fixed">
-    <origin xyz="0.079 0.001 0.285" rpy="0 0 0" />
+    <origin xyz="0.079 0.001 0.285" rpy="-1.57 0 -1.57" />
     <parent link="base_link" />
     <child link="realsense_link" />
     <axis xyz="0 0 0" />
@@ -233,7 +233,7 @@
     </inertial>
 
     <visual>
-      <origin xyz="-0.078 0 -0.735" rpy="1.57 0 1.57" />
+      <origin xyz="0 0.735 -0.078" rpy="3.14 3.14 0" />
       <geometry>
         <mesh filename="package://thesis_robot_modeling/meshes/realsense_link.STL" />
       </geometry>
@@ -243,7 +243,7 @@
     </visual>
 
     <collision>
-      <origin xyz="0 0 0" rpy="1.57 0 -1.57" />
+      <origin xyz="0 0.735 -0.078" rpy="3.14 3.14 0" />
       <geometry>
         <mesh filename="package://thesis_robot_modeling/meshes/realsense_link.STL" />
       </geometry>
@@ -282,7 +282,7 @@
     </visual>
 
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="-0.038 0.0713 -0.415" rpy="1.57 0 1.57" />
       <geometry>
         <mesh filename="package://thesis_robot_modeling/meshes/imu_link.STL" />
       </geometry>

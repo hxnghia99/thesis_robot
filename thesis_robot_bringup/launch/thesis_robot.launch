@@ -23,4 +23,6 @@
     <arg name="enable_infra2"       value="false"/>
   </include>
 
+  <node pkg="tf" type="static_transform_publisher" name="camera_optical_link" args="0.079 0.001 0.385 -1.57 0 -1.57 /base_footprint /camera_color_optical_frame 100"/>    
+
 </launch>
