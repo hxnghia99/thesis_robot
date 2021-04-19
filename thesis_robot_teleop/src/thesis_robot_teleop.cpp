@@ -18,7 +18,7 @@ void checkLinearLimitVel(float& linear_vel);
 void ros_info_vel(float goal_linear, float goal_angular);
 
 //global variables
-const float ROBOT_MAX_LIN_VEL(0.1), ROBOT_MAX_ANG_VEL(0.15);
+const float ROBOT_MAX_LIN_VEL(0.15), ROBOT_MAX_ANG_VEL(0.3);
 const float LIN_VEL_STEP_SIZE(0.025), ANG_VEL_STEP_SIZE(0.05);
 
 int main(int argc, char ** argv) {
@@ -134,8 +134,8 @@ int getch(void)
 }
 
 void ros_info_vel(float goal_linear, float goal_angular) {
-	//ROS_INFO("Current:	Linear_vel = %1.2f (m/s) \t Angular_vel = %1.2f (rad/s)", goal_linear*2, goal_angular*2);
-	printf("Current:	Linear_vel = %1.2f (m/s) \t Angular_vel = %1.2f (rad/s) \n", goal_linear*2, goal_angular*2);
+	//ROS_INFO("Current:	Linear_vel = %2.2f (m/s) \t Angular_vel = %2.2f (rad/s)", goal_linear*2, goal_angular*2);
+	printf("Current:	Linear_vel = %1.1f (cm/s) \t Angular_vel = %1.2f (rad/s) \n", goal_linear*100, goal_angular);
 }
 
 void checkLinearLimitVel(float& linear_vel) {
