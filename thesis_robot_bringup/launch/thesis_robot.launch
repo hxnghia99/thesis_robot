@@ -1,0 +1,28 @@
+<launch>
+
+  <arg name="multi_robot_name"      default=""/>
+  <arg name="set_lidar_frame_id"    default="base_scan"/>
+  <arg name="camera_filter"         default="pointcloud"/>
+  <arg name="camera_type"           default="d435"/>
+  <arg name="camera_align_depth"    default="true"/>
+  <arg name="camera_enable"         default="true"/>
+
+
+
+  <!-- Rosserial -->
+  <include file="$(find thesis_robot_bringup)/launch/thesis_robot_rosserial.launch">
+    <!--arg name="multi_robot_name" value="$(arg multi_robot_name)"/-->
+  </include>
+
+  <!-- Camera -->
+  <include if="$(arg camera_enable)" file="$(find thesis_robot_bringup)/launch/thesis_robot_realsense.launch">
+    <arg name="filters"             value="$(arg camera_filter)"/>
+    <arg name="device_type"         value="$(arg camera_type)"/>
+    <arg name="align_depth"         value="$(arg camera_align_depth)"/>
+    <arg name="enable_infra1"       value="false"/>
+    <arg name="enable_infra2"       value="false"/>
+  </include>
+
+  <node pkg="tf" type="static_transform_publisher" name="camera_link" args="0 0 0 0 0 0 /realsense_link /camera_link 100"/>  
+
+</launch>
