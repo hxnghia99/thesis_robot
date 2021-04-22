@@ -40,7 +40,7 @@ Moving around:
 	w
 a	s	d
 	x
-w/x : increase/decrease linear velocity ( 0.05/time)
+w/x : increase/decrease linear velocity ( 0.025/time)
 a/d : increase/decrease angular velocity  (0.05/time)
 
 space key, s : force stop
