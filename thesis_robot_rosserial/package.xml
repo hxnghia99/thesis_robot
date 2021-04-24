@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>thesis_robot_rosserial</name>
+  <version>0.9.3</version>
+  <description>The thesis_robot_rosserial package</description>
+
+  <maintainer email="hxnghia@todo.todo">hxnghia</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>rospy</run_depend>
+  <run_depend>rosserial_msgs</run_depend>
+  <run_depend>diagnostic_msgs</run_depend>
+  <run_depend>python3-serial</run_depend>
+  <run_depend>tf</run_depend>
+</package>
