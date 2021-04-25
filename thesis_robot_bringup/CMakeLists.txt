@@ -11,7 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   realsense2_camera
   roscpp
   rospy
-  rosserial_python
+  thesis_robot_rosserial
   rplidar_ros
   thesis_robot_modeling
 )

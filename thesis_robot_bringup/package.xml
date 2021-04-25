@@ -52,19 +52,19 @@
   <build_depend>realsense2_camera</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>rospy</build_depend>
-  <build_depend>rosserial_python</build_depend>
+  <build_depend>thesis_robot_rosserial</build_depend>
   <build_depend>rplidar_ros</build_depend>
   <build_depend>thesis_robot_modeling</build_depend>
   <build_export_depend>realsense2_camera</build_export_depend>
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
-  <build_export_depend>rosserial_python</build_export_depend>
+  <build_export_depend>thesis_robot_rosserial</build_export_depend>
   <build_export_depend>rplidar_ros</build_export_depend>
   <build_export_depend>thesis_robot_modeling</build_export_depend>
   <exec_depend>realsense2_camera</exec_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
-  <exec_depend>rosserial_python</exec_depend>
+  <exec_depend>thesis_robot_rosserial</exec_depend>
   <exec_depend>rplidar_ros</exec_depend>
   <exec_depend>thesis_robot_modeling</exec_depend>
 
