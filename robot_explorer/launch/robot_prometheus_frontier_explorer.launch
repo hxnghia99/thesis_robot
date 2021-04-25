@@ -1,0 +1,29 @@
+<launch>
+
+  <!-- Arguments -->
+  <arg name="move_forward_only" default="true"/>
+  <arg name="sensor_range" default="1.0"/>
+  <arg name="cmd_vel_topic" default="/cmd_vel" />
+  <arg name="odom_topic" default="odom" />
+  <arg name="rviz" default="false"/>
+
+  <include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/>
+
+  <include file="$(find thesis_robot_bringup)/launch/thesis_robot_rtabmap.launch">
+      <arg name="rviz" value="$(arg rviz)"/>
+  </include>
+
+  <!-- AMCL -->
+  <include file="$(find robot_navigation)/launch/amcl.launch"/>
+
+  <!-- move_base -->
+  <include file="$(find robot_navigation)/launch/move_base.launch">
+    <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+  </include>
+
+  <node pkg = "robot_explorer" type = "prometheus" name = "prometheus" output = "screen" launch-prefix="gnome-terminal --command"/>
+
+    <!-- Rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_explorer)/rviz/robot_prometheus_frontier_explorer.rviz"/>
+
+</launch>
