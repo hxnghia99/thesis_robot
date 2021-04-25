@@ -289,6 +289,9 @@ void RealSenseNodeFactory::StartDevice()
 	uint16_t pid = std::stoi(pid_str, 0, 16);
 	switch(pid)
 	{
+	case RS430_PID:
+	case RS430_MM_PID:
+	case RS430_MM_RGB_PID:
 	case RS435_RGB_PID:
 	case RS435i_RGB_PID:
 		_realSenseNode = std::unique_ptr<BaseRealSenseNode>(new BaseRealSenseNode(nh, privateNh, _device, _serial_no));
