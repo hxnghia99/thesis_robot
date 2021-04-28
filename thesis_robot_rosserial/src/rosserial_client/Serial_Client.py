@@ -10,7 +10,7 @@ import errno
 import imp
 import io
 import multiprocessing
-import queue
+import Queue as queue
 import socket
 import struct
 import sys
@@ -25,6 +25,8 @@ from std_msgs.msg import Time
 from rosserial_msgs.msg import TopicInfo, Log
 from rosserial_msgs.srv import RequestParamRequest, RequestParamResponse
 import diagnostic_msgs.msg
+
+sys.dont_write_bytecode = True
 
 ERROR_MISMATCHED_PROTOCOL = "Mismatched protocol version in packet: lost sync or rosserial_python is from different ros release than the rosserial client"
 ERROR_NO_SYNC = "no sync with device"
