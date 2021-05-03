@@ -412,7 +412,7 @@ void BaseRealSenseNode::registerAutoExposureROIOptions(ros::NodeHandle& nh)
     {
         rs2::sensor sensor = _sensors[profile.first];
         std::string module_base_name(sensor.get_info(RS2_CAMERA_INFO_NAME));
-        if (sensor.is<rs2::roi_sensor>() && _auto_exposure_roi.find(module_base_name) == _auto_exposure_roi.end())
+        if (!sensor.is<rs2::roi_sensor>() && _auto_exposure_roi.find(module_base_name) == _auto_exposure_roi.end())
         {
             int max_x(_width[profile.first]-1);
             int max_y(_height[profile.first]-1);
@@ -569,8 +569,8 @@ void BaseRealSenseNode::registerDynamicOption(ros::NodeHandle& nh, rs2::options 
         }
         
     }
-    ddynrec->publishServicesTopics();
-    _ddynrec.push_back(ddynrec);
+    //ddynrec->publishServicesTopics();
+    //_ddynrec.push_back(ddynrec);
 }
 
 void BaseRealSenseNode::registerDynamicReconfigCb(ros::NodeHandle& nh)
@@ -931,7 +931,7 @@ void BaseRealSenseNode::setupPublishers()
     if (_enable[COLOR] &&
         _enable[DEPTH])
     {
-        _depth_to_other_extrinsics_publishers[COLOR] = _node_handle.advertise<Extrinsics>("extrinsics/depth_to_color", 1, true);
+        //_depth_to_other_extrinsics_publishers[COLOR] = _node_handle.advertise<Extrinsics>("extrinsics/depth_to_color", 1, true);
     }
 
     if (_enable[INFRA1] &&

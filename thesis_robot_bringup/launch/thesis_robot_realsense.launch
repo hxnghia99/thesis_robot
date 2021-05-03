@@ -98,4 +98,20 @@
       <arg name="allow_no_texture_points"   value="$(arg allow_no_texture_points)"/>
     </include>
   </group>
+
+  <rosparam ns="camera/color/image_raw" param="disable_pub_plugins">
+    - 'image_transport/compressed'
+    - 'image_transport/compressedDepth'
+    </rosparam>
+  <rosparam ns="camera/aligned_depth_to_color/image_raw" param="disable_pub_plugins">
+    - 'image_transport/compressed'
+    - 'image_transport/compressedDepth'
+    </rosparam>
+  <rosparam ns="camera/depth/image_rect_raw" param="disable_pub_plugins">
+    - 'image_transport/compressed'
+    - 'image_transport/compressedDepth'
+    </rosparam>
+
+
+
 </launch>

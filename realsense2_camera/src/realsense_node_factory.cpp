@@ -3,7 +3,6 @@
 
 #include "../include/realsense_node_factory.h"
 #include "../include/base_realsense_node.h"
-#include "../include/t265_realsense_node.h"
 #include <iostream>
 #include <map>
 #include <mutex>
@@ -195,11 +194,11 @@ void RealSenseNodeFactory::getDevice(rs2::device_list list)
 		}
 	}
 
-	bool remove_tm2_handle(_device && RS_T265_PID != std::stoi(_device.get_info(RS2_CAMERA_INFO_PRODUCT_ID), 0, 16));
-	if (remove_tm2_handle)
-	{
-		_ctx.unload_tracking_module();
-	}
+	// bool remove_tm2_handle(_device && RS_T265_PID != std::stoi(_device.get_info(RS2_CAMERA_INFO_PRODUCT_ID), 0, 16));
+	// if (remove_tm2_handle)
+	// {
+	// 	_ctx.unload_tracking_module();
+	// }
 
 	if (_device && _initial_reset)
 	{
@@ -356,9 +355,6 @@ void RealSenseNodeFactory::StartDevice()
 		case RS_L515_PID_PRE_PRQ:
 		case RS_L515_PID:
 			_realSenseNode = std::shared_ptr<BaseRealSenseNode>(new BaseRealSenseNode(nh, privateNh, _device, _serial_no));
-			break;
-		case RS_T265_PID:
-			_realSenseNode = std::shared_ptr<T265RealsenseNode>(new T265RealsenseNode(nh, privateNh, _device, _serial_no));
 			break;
 		default:
 			ROS_FATAL_STREAM("Unsupported device!" << " Product ID: 0x" << pid_str);

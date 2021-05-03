@@ -169,14 +169,14 @@
   </link>
 
 
-  <joint name="lidar_joint" type="fixed">
+  <joint name="rplidar_joint" type="fixed">
     <origin xyz="-0.01 0 0.335" rpy="0 0 3.14" />
     <parent link="base_link" />
-    <child link="rplidar_link" />
+    <child link="lidar_link" />
   </joint>
 
 
-  <link name="rplidar_link">
+  <link name="lidar_link">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <mass value="0.021237" />
