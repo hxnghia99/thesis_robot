@@ -16,13 +16,11 @@
   <arg unless="$(arg delete_db)" name="args"  default=""/>
 
   <!-- Input topics -->
-  <arg     if="$(arg simulation)" name="rgb_topic"      default="/camera/color/image_raw"/>
-  <arg unless="$(arg simulation)" name="rgb_topic"      default="/camera/color/image_raw"/>
-  <arg     if="$(arg simulation)" name="depth_topic"    default="/camera/depth/image_raw"/>
-  <arg unless="$(arg simulation)" name="depth_topic"    default="/camera/aligned_depth_to_color/image_raw"/>
-  <arg name="camera_info_topic"                         default="/camera/color/camera_info"/>
-  <arg name="scan_topic"                                default="/scan"/>
-  <arg name="odom_topic"                                default="/odom"/>
+  <arg name="rgb_topic"           default="/camera/color/image_raw"/>
+  <arg name="depth_topic"         default="/camera/aligned_depth_to_color/image_raw"/>
+  <arg name="camera_info_topic"   default="/camera/color/camera_info"/>
+  <arg name="scan_topic"          default="/scan"/>
+  <arg name="odom_topic"          default="/odom"/>
   
 
   <!-- Navigation parameters -->

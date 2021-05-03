@@ -212,14 +212,14 @@
   <joint name="realsense_joint" type="fixed">
     <origin xyz="0.079 0.001 0.285" rpy="-1.57 0 -1.57" />
     <parent link="base_link" />
-    <child link="camera_link" />
+    <child link="realsense_link" />
     <axis xyz="0 0 0" />
     <safety_controller k_velocity="0" />
   </joint>
 
 
 
-  <link name="camera_link">
+  <link name="realsense_link">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <mass value="0.010349" />
@@ -288,5 +288,49 @@
       </geometry>
     </collision>
   </link>
+
+
+<joint name="camera_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="realsense_link" />
+    <child link="camera_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+<link name="camera_link"/>
+
+<joint name="camera_depth_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="realsense_link" />
+    <child link="camera_depth_frame" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="camera_depth_frame"/>
+
+<joint name="camera_color_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="realsense_link" />
+    <child link="camera_color_frame" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="camera_color_frame"/>
+
+  <joint name="camera_depth_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="realsense_link" />
+    <child link="camera_depth_optical_frame" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="camera_depth_optical_frame"/>
+
+<joint name="camera_color_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="realsense_link" />
+    <child link="camera_color_optical_frame" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="camera_color_optical_frame"/>
+
+
+
 
 </robot>
