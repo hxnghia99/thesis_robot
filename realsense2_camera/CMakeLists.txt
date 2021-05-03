@@ -5,12 +5,16 @@ add_compile_options(-std=c++11)
 option(BUILD_WITH_OPENMP "Use OpenMP" OFF)
 option(SET_USER_BREAK_AT_STARTUP "Set user wait point in startup (for debug)" OFF)
 
+add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
 find_package(catkin REQUIRED COMPONENTS
     message_generation
     nav_msgs
     roscpp
     sensor_msgs
     std_msgs
+    std_srvs
     nodelet
     cv_bridge
     image_transport
@@ -34,7 +38,12 @@ if(SET_USER_BREAK_AT_STARTUP)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DBPDEBUG")
 endif()
 
-find_package(realsense2 2.35.2)
+if (WIN32)
+find_package(realsense2 CONFIG REQUIRED)
+else()
+find_package(realsense2 2.42.0)
+endif()
+
 if(NOT realsense2_FOUND)
     message(FATAL_ERROR "\n\n Intel RealSense SDK 2.0 is missing, please install it from https://github.com/IntelRealSense/librealsense/releases\n\n")
 endif()
@@ -51,7 +60,10 @@ else()
     message(STATUS "Create Debug Build.")
 endif()
 
+if (WIN32)
+else()
 set(CMAKE_CXX_FLAGS "-fPIE -fPIC -std=c++11 -D_FORTIFY_SOURCE=2 -fstack-protector -Wformat -Wformat-security -Wall ${CMAKE_CXX_FLAGS}")
+endif()
 
 add_message_files(
     FILES
@@ -87,8 +99,10 @@ add_library(${PROJECT_NAME}
     include/constants.h
     include/realsense_node_factory.h
     include/base_realsense_node.h
+    include/t265_realsense_node.h
     src/realsense_node_factory.cpp
     src/base_realsense_node.cpp
+    src/t265_realsense_node.cpp
     )
 
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_generate_messages_cpp)
@@ -102,6 +116,15 @@ target_link_libraries(${PROJECT_NAME}
     ${catkin_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
     )
+
+if(WIN32)
+set_target_properties(${realsense2_LIBRARY} PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO RELEASE)
+target_link_libraries(${PROJECT_NAME}
+    realsense2::realsense2 
+    realsense2::realsense-file
+    )
+endif()
+
 
 # Install nodelet library
 install(TARGETS ${PROJECT_NAME}
