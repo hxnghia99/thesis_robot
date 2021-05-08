@@ -1,0 +1,6 @@
+<launch>
+	<machine name="JetsonNano" address="192.168.43.77" env-loader="/opt/ros/melodic/env.sh" user="thesis" password="130599"/>
+
+	<node machine="JetsonNano" name="thesis_robot_teleop" pkg="thesis_robot_teleop" type="thesis_robot_teleop"/>
+
+</launch>
