@@ -4,6 +4,7 @@
   <arg name="initial_pose_x" default="0.0"/>
   <arg name="initial_pose_y" default="0.0"/>
   <arg name="initial_pose_a" default="0.0"/>
+  <arg name="use_map_topic"  default="true"/>
 
   <!-- AMCL -->
   <node pkg="amcl" type="amcl" name="amcl">
@@ -41,6 +42,7 @@
     <param name="odom_alpha4"               value="0.1"/>
     <param name="odom_frame_id"             value="odom"/>
     <param name="base_frame_id"             value="base_footprint"/>
+    <param name="use_map_topic"             value="$(arg use_map_topic)"/>
 
   </node>
 </launch>

@@ -7,23 +7,22 @@
   <arg name="odom_topic" default="odom" />
   <arg name="rviz" default="false"/>
 
-  <include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/>
-
-  <include file="$(find thesis_robot_bringup)/launch/thesis_robot_rtabmap.launch">
+  <!--include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/-->
+  <include file="$(find thesis_robot_bringup)/launch/thesis_robot_rtabmap.launch"> <!-- including robot_remote-->
       <arg name="rviz" value="$(arg rviz)"/>
   </include>
 
   <!-- AMCL -->
-  <include file="$(find robot_navigation)/launch/amcl.launch"/>
+  <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="Delay_amcl" args="10 robot_navigation amcl.launch" output="screen"/>
 
-  <!-- move_base -->
+  <!-- move_base >
   <include file="$(find robot_navigation)/launch/move_base.launch">
     <arg name="move_forward_only" value="$(arg move_forward_only)"/>
-  </include>
+  </include-->
 
-  <node pkg = "robot_explorer" type = "prometheus" name = "prometheus" output = "screen" launch-prefix="gnome-terminal --command"/>
+  <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="Delay_frontier_explorer" args="20 robot_explorer frontier_explorer.launch" output="screen"/>
 
     <!-- Rviz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_explorer)/rviz/robot_prometheus_frontier_explorer.rviz"/>
+  <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_explorer)/rviz/robot_prometheus_frontier_explorer.rviz"/>
 
 </launch>

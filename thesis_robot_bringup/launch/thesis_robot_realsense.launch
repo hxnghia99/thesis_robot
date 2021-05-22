@@ -23,7 +23,7 @@
   <arg name="enable_color"        default="true"/>
 
   <arg name="fisheye_fps"         default="30"/>
-  <arg name="depth_fps"           default="30"/>
+  <arg name="depth_fps"           default="15"/>
   <arg name="infra_fps"           default="30"/>
   <arg name="color_fps"           default="15"/>
   <arg name="gyro_fps"            default="400"/>
@@ -102,16 +102,15 @@
   <rosparam ns="camera/color/image_raw" param="disable_pub_plugins">
     - 'image_transport/compressed'
     - 'image_transport/compressedDepth'
-    </rosparam>
+  </rosparam>
+
   <rosparam ns="camera/aligned_depth_to_color/image_raw" param="disable_pub_plugins">
     - 'image_transport/compressed'
     - 'image_transport/compressedDepth'
-    </rosparam>
+  </rosparam>
+
   <rosparam ns="camera/depth/image_rect_raw" param="disable_pub_plugins">
     - 'image_transport/compressed'
     - 'image_transport/compressedDepth'
-    </rosparam>
-
-
-
+  </rosparam>
 </launch>

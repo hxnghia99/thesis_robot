@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(thesis_robot_bringup)
+project(thesis_robot_test)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,13 +8,12 @@ project(thesis_robot_bringup)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  realsense2_camera
+  geometry_msgs
   roscpp
   rospy
-  thesis_robot_rosserial
-  rplidar_ros
-  thesis_robot_modeling
-  thesis_robot_teleop
+  cv_bridge
+  std_msgs
+  nav_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -74,7 +73,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
+#   geometry_msgs#   std_msgs
 # )
 
 ################################################
@@ -108,8 +107,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES thesis_robot_bringup
-#  CATKIN_DEPENDS realsense2_camera roscpp rospy rosserial_python rplidar_ros thesis_robot_modeling
+#  LIBRARIES thesis_robot_test
+#  CATKIN_DEPENDS geometry_msgs roscpp std_msgs
 #  DEPENDS system_lib
 )
 
@@ -126,7 +125,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/thesis_robot_bringup.cpp
+#   src/${PROJECT_NAME}/thesis_robot_test.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -137,7 +136,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/thesis_robot_bringup_node.cpp)
+add_executable(dummy_odom_pub_node src/pub_odom.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -150,23 +149,23 @@ include_directories(
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
-# )
+ target_link_libraries(dummy_odom_pub_node
+   ${catkin_LIBRARIES}
+ )
 
 #############
 ## Install ##
 #############
-
+find_package(OPENCV EXACT 3.2)
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+catkin_install_python(PROGRAMS
+  src/compressed_raw_to_depth.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
@@ -201,7 +200,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_thesis_robot_bringup.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_thesis_robot_test.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

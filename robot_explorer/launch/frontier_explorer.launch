@@ -1,6 +1,0 @@
-<launch>
-
-  <node pkg = "robot_explorer" type = "prometheus" name = "prometheus" output = "screen" launch-prefix="gnome-terminal --command"/>
-
-
-</launch>
