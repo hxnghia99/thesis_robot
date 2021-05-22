@@ -1,0 +1,5 @@
+<launch>
+
+    <node pkg="thesis_robot_teleop" type="thesis_robot_teleop" name="teleop" output="screen"/>
+
+</launch>

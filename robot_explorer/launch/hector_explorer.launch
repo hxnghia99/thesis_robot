@@ -1,0 +1,62 @@
+<launch>
+<launch>
+
+  <!-- Arguments -->
+  <arg name="move_forward_only" default="true"/>
+  <arg name="sensor_range" default="1.0"/>
+  <arg name="cmd_vel_topic" default="/cmd_vel" />
+  <arg name="odom_topic" default="odom" />
+  <arg name="configuration_basename" default="robot_lds_2d.lua"/>
+  <arg name="use_map_topic" default="false"/>
+  <arg name="scan_topic"                                default="/scan"/>
+  <arg name="rviz" default="false"/>
+
+
+  <arg name="odom_frame_id"   default="odom"/>
+  <arg name="base_frame_id"   default="base_footprint"/>
+  <arg name="global_frame_id" default="map"/>
+
+
+  <arg name="slam_methods" default="hector"/>
+
+  <!-- SLAM: Gmapping, Cartographer, Hector, Karto, Frontier_exploration, RTAB-Map -->
+  <include file="$(find robot_slam)/launch/robot_$(arg slam_methods).launch">
+    <arg name="configuration_basename" value="$(arg configuration_basename)"/>
+  </include>
+
+  <!-- AMCL -->
+  <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="Delay_amcl" args="10 robot_navigation amcl.launch" output="screen"/>
+
+  <!-- move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find thesis_robot_bringup)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find thesis_robot_bringup)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />   
+    <rosparam file="$(find thesis_robot_bringup)/param/local_costmap_params.yaml" command="load" />   
+    <rosparam file="$(find thesis_robot_bringup)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find thesis_robot_bringup)/param/dwa_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find thesis_robot_bringup)/param/move_base_params.yaml" command="load" />
+    <rosparam file="$(find thesis_robot_bringup)/param/global_planner_params.yaml" command="load" />
+    <rosparam file="$(find thesis_robot_bringup)/param/navfn_global_planner_params.yaml" command="load" />
+   
+    <rosparam file="$(arg custom_param_file)" command="load" />
+    
+   
+    <param name="global_costmap/global_frame" value="$(arg global_frame_id)"/>
+    <param name="global_costmap/robot_base_frame" value="$(arg base_frame_id)"/>
+    <param name="local_costmap/global_frame" value="$(arg odom_frame_id)"/>
+    <param name="local_costmap/robot_base_frame" value="$(arg base_frame_id)"/>
+    <param name="DWAPlannerROS/global_frame_id" value="$(arg odom_frame_id)"/>
+
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <remap from="scan" to="$(arg scan_topic)"/>
+  </node>
+
+
+  <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="Delay_frontier_explorer" args="20 robot_explorer frontier_explorer.launch" output="screen"/>
+
+    <!-- Rviz -->
+  <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_explorer)/rviz/robot_prometheus_frontier_explorer.rviz"/>
+
+  </launch>
+
+

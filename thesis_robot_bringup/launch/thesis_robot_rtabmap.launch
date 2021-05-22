@@ -1,6 +1,8 @@
 <launch>
   
-  <arg name="rviz"  default="true"/>
+  <node name="camera_color_optical" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /base_link /camera_color_optical_frame 100"/>
+
+  <arg name="rviz"  default="false"/>  
   <arg name="rtabmapviz"  default="false"/>
   <arg name="gui_cfg"                 default="~/.ros/rtabmap_gui.ini" />
 
@@ -19,16 +21,12 @@
   <arg name="odom_topic"                                default="/odom"/>
   
 
-  <arg name="compressed"              default="false"/>
+  <arg name="compressed"              default="true"/>
   <arg name="rgb_image_transport"     default="compressed"/>
-  <arg name="depth_image_transport"   default="compressedDepth"/>
   <arg if="$(arg compressed)"     name="rgb_topic_relay"           default="$(arg rgb_topic)_relay"/>
   <arg unless="$(arg compressed)" name="rgb_topic_relay"           default="$(arg rgb_topic)"/>
-  <arg if="$(arg compressed)"     name="depth_topic_relay"         default="$(arg depth_topic)_relay"/>
-  <arg unless="$(arg compressed)" name="depth_topic_relay"         default="$(arg depth_topic)"/>
   <node if="$(arg compressed)" name="republish_rgb" type="republish" pkg="image_transport" args="$(arg rgb_image_transport) in:=$(arg rgb_topic) raw out:=$(arg rgb_topic_relay)" />
-  <node if="$(arg compressed)" name="republish_depth" type="republish" pkg="image_transport" args="$(arg depth_image_transport) in:=$(arg depth_topic) raw out:=$(arg depth_topic_relay)" />
-
+  
   <arg name="rtabmap_frame"     default="base_footprint"/>
 
   <arg     if="$(arg delete_db)" name="args"  default="--delete_db_on_start"/>
@@ -43,7 +41,7 @@
   <arg name="laser_topic" default="scan" />
   <arg name="custom_param_file" default="$(find robot_navigation)/param/dummy.yaml"/>
 
-  <!--node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <rosparam file="$(find thesis_robot_bringup)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find thesis_robot_bringup)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />   
     <rosparam file="$(find thesis_robot_bringup)/param/local_costmap_params.yaml" command="load" />   
@@ -64,9 +62,7 @@
 
     <remap from="odom" to="$(arg odom_topic)"/>
     <remap from="scan" to="$(arg laser_topic)"/>
-  </node-->
-
-
+  </node>
 
   <!-- Robot remote and description -->
   <include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/>
@@ -90,7 +86,7 @@
       <!-- inputs -->
       <remap from="scan"            to="$(arg scan_topic)"/>
       <remap from="rgb/image"       to="$(arg rgb_topic_relay)"/>
-      <remap from="depth/image"     to="$(arg depth_topic_relay)"/>
+      <remap from="depth/image"     to="$(arg depth_topic)"/>
       <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
       <remap from="odom"            to="$(arg odom_topic)"/>
 

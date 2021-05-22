@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   thesis_robot_rosserial
   rplidar_ros
   thesis_robot_modeling
+  thesis_robot_teleop
 )
 
 ## System dependencies are found with CMake's conventions
