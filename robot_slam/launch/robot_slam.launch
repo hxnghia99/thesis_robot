@@ -2,33 +2,34 @@
   <!-- Arguments -->
   <arg name="slam_methods" default="hector" doc="slam type [gmapping, cartographer, hector, karto, frontier_exploration]"/>
   <arg name="configuration_basename" default="robot_lds_2d.lua"/>
-  <arg name="open_rviz" default="true"/>
+  <arg name="open_rviz" default="false"/>
 
-  <include file="$(find robot_bringup)/launch/robot_remote.launch"/>
+  <include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/>
 
 
   <!-- SLAM: Gmapping, Cartographer, Hector, Karto, Frontier_exploration, RTAB-Map -->
   <include file="$(find robot_slam)/launch/robot_$(arg slam_methods).launch">
-    <arg name="configuration_basename" value="$(arg configuration_basename)"/>
+    <!--arg name="configuration_basename" value="$(arg configuration_basename)"/-->
   </include>
 
   <!-- Navigation parameters -->
   <arg name="odom_frame_id"   default="odom"/>
   <arg name="base_frame_id"   default="base_footprint"/>
   <arg name="global_frame_id" default="map"/>
-  <!--arg name="odom_topic" default="odom" /-->
+  <arg name="odom_topic" default="odom" />
   <arg name="laser_topic" default="scan" />
   <arg name="custom_param_file" default="$(find robot_navigation)/param/dummy.yaml"/>
 
-  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-    <rosparam file="$(find thesis_robot_bringup)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find thesis_robot_bringup)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />   
-    <rosparam file="$(find thesis_robot_bringup)/param/local_costmap_params.yaml" command="load" />   
-    <rosparam file="$(find thesis_robot_bringup)/param/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find thesis_robot_bringup)/param/dwa_local_planner_params.yaml" command="load" />
-    <rosparam file="$(find thesis_robot_bringup)/param/move_base_params.yaml" command="load" />
-    <rosparam file="$(find thesis_robot_bringup)/param/global_planner_params.yaml" command="load" />
-    <rosparam file="$(find thesis_robot_bringup)/param/navfn_global_planner_params.yaml" command="load" />
+  <!-- move base -->
+  <!--node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find robot_navigation)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find robot_navigation)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />   
+    <rosparam file="$(find robot_navigation)/param/local_costmap_params.yaml" command="load" />   
+    <rosparam file="$(find robot_navigation)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find robot_navigation)/param/dwa_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find robot_navigation)/param/move_base_params.yaml" command="load" />
+    <rosparam file="$(find robot_navigation)/param/global_planner_params.yaml" command="load" />
+    <rosparam file="$(find robot_navigation)/param/navfn_global_planner_params.yaml" command="load" />
    
     <rosparam file="$(arg custom_param_file)" command="load" />
     
@@ -41,7 +42,7 @@
 
     <remap from="odom" to="$(arg odom_topic)"/>
     <remap from="scan" to="$(arg laser_topic)"/>
-  </node>
+  </node-->
 
   <!-- rviz -->
   <group if="$(arg open_rviz)"> 

@@ -212,14 +212,14 @@
   <joint name="realsense_joint" type="fixed">
     <origin xyz="0.079 0.001 0.285" rpy="-1.57 0 -1.57" />
     <parent link="base_link" />
-    <child link="camera_link" />
+    <child link="realsense_link" />
     <axis xyz="0 0 0" />
     <safety_controller k_velocity="0" />
   </joint>
 
 
 
-  <link name="camera_link">
+  <link name="realsense_link">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <mass value="0.010349" />
