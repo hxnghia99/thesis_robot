@@ -169,7 +169,7 @@
   </link>
 
 
-  <joint name="lidar_joint" type="fixed">
+  <joint name="rplidar_joint" type="fixed">
     <origin xyz="-0.01 0 0.335" rpy="0 0 3.14" />
     <parent link="base_link" />
     <child link="lidar_link" />
@@ -288,5 +288,49 @@
       </geometry>
     </collision>
   </link>
+
+
+<joint name="camera_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="realsense_link" />
+    <child link="camera_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+<link name="camera_link"/>
+
+<joint name="camera_depth_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="realsense_link" />
+    <child link="camera_depth_frame" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="camera_depth_frame"/>
+
+<joint name="camera_color_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="realsense_link" />
+    <child link="camera_color_frame" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="camera_color_frame"/>
+
+  <joint name="camera_depth_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="realsense_link" />
+    <child link="camera_depth_optical_frame" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="camera_depth_optical_frame"/>
+
+<joint name="camera_color_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="realsense_link" />
+    <child link="camera_color_optical_frame" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="camera_color_optical_frame"/>
+
+
+
 
 </robot>

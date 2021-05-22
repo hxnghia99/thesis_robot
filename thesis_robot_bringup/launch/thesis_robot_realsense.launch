@@ -113,6 +113,4 @@
     - 'image_transport/compressed'
     - 'image_transport/compressedDepth'
   </rosparam>
-
-
 </launch>

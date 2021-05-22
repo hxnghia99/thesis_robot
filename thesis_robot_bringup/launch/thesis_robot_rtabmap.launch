@@ -19,7 +19,6 @@
   <arg name="camera_info_topic"                         default="/camera/color/camera_info"/>
   <arg name="scan_topic"                                default="/scan"/>
   <arg name="odom_topic"                                default="/odom"/>
-  
 
   <arg name="compressed"              default="true"/>
   <arg name="rgb_image_transport"     default="compressed"/>
