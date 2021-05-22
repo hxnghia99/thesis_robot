@@ -10,6 +10,8 @@ project(thesis_robot_test)
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   roscpp
+  rospy
+  cv_bridge
   std_msgs
   nav_msgs
 )
@@ -154,16 +156,16 @@ add_executable(dummy_odom_pub_node src/pub_odom.cpp)
 #############
 ## Install ##
 #############
-
+find_package(OPENCV EXACT 3.2)
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+catkin_install_python(PROGRAMS
+  src/compressed_raw_to_depth.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
