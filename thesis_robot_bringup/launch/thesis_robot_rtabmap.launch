@@ -1,6 +1,6 @@
 <launch>
   
-  <node name="camera_color_optical" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /base_link /camera_color_optical_frame 100"/>
+  <node name="camera_color_optical" pkg="tf" type="static_transform_publisher" args="0 0 0.285 1.57 3.14 1.57 /base_link /camera_color_optical_frame 100"/>
 
   <arg name="rviz"  default="false"/>  
   <arg name="rtabmapviz"  default="false"/>
@@ -18,7 +18,7 @@
   <arg name="depth_topic"                               default="/camera/aligned_depth_to_color/image_raw"/>
   <arg name="camera_info_topic"                         default="/camera/color/camera_info"/>
   <arg name="scan_topic"                                default="/scan"/>
-  <arg name="odom_topic"                                default="/odom"/>
+  <arg name="odom_topic"                                default="/pose2D"/>
 
   <arg name="compressed"              default="false"/>
   <arg name="rgb_image_transport"     default="compressed"/>
