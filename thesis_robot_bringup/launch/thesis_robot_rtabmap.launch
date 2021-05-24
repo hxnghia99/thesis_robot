@@ -18,7 +18,7 @@
   <arg name="depth_topic"                               default="/camera/aligned_depth_to_color/image_raw"/>
   <arg name="camera_info_topic"                         default="/camera/color/camera_info"/>
   <arg name="scan_topic"                                default="/scan"/>
-  <arg name="odom_topic"                                default="/pose2D"/>
+  <arg name="odom_topic"                                default="/odom"/>
 
   <arg name="compressed"              default="false"/>
   <arg name="rgb_image_transport"     default="compressed"/>
