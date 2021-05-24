@@ -3,7 +3,7 @@
   <arg name="multi_robot_name"      default=""/>
   <arg name="set_lidar_frame_id"    default="base_scan"/>
   <arg name="camera_filter"         default="pointcloud"/>
-  <arg name="camera_type"           default="d435"/>
+  <arg name="camera_type"           default="d435i"/>
   <arg name="camera_align_depth"    default="true"/>
   <arg name="camera_enable"         default="true"/>
 
