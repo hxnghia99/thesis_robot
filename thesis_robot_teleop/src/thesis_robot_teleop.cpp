@@ -18,8 +18,8 @@ void checkLinearLimitVel(float& linear_vel);
 void ros_info_vel(float goal_linear, float goal_angular);
 
 //global variables
-const float ROBOT_MAX_LIN_VEL(0.15), ROBOT_MAX_ANG_VEL(0.3);
-const float LIN_VEL_STEP_SIZE(0.025), ANG_VEL_STEP_SIZE(0.05);
+const float ROBOT_MAX_LIN_VEL(0.3), ROBOT_MAX_ANG_VEL(0.5);
+const float LIN_VEL_STEP_SIZE(0.075), ANG_VEL_STEP_SIZE(0.075);
 
 int main(int argc, char ** argv) {
 	ros::init(argc, argv, "cmd_vel_publisher");
@@ -40,8 +40,8 @@ Moving around:
 	w
 a	s	d
 	x
-w/x : increase/decrease linear velocity ( 0.025/time)
-a/d : increase/decrease angular velocity  (0.05/time)
+w/x : increase/decrease linear velocity ( 0.075/time)
+a/d : increase/decrease angular velocity  (0.075/time)
 
 space key, s : force stop
 ---------------------------
