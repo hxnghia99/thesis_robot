@@ -4,6 +4,7 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /TF1
         - /TF1/Frames1
         - /TF1/Tree1
         - /Global Map1/Costmap1
@@ -159,11 +160,11 @@ Visualization Manager:
           Value: false
         map:
           Value: false
-        odom:
-          Value: false
         realsense_link:
           Value: true
         right_wheel_link:
+          Value: false
+        world:
           Value: false
       Marker Scale: 3
       Name: TF
@@ -172,9 +173,11 @@ Visualization Manager:
       Show Names: false
       Tree:
         map:
-          odom:
+          world:
             base_footprint:
               base_link:
+                camera_color_optical_frame:
+                  {}
                 caster_wheel_link:
                   {}
                 imu_link:
@@ -185,8 +188,6 @@ Visualization Manager:
                   {}
                 realsense_link:
                   camera_color_frame:
-                    {}
-                  camera_color_optical_frame:
                     {}
                   camera_depth_frame:
                     {}
@@ -498,7 +499,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 11.171125411987305
+      Distance: 10.512917518615723
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -513,10 +514,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5697963237762451
+      Pitch: 1.2847964763641357
       Target Frame: base_footprint
       Value: Orbit (rviz)
-      Yaw: 2.100961446762085
+      Yaw: 2.3559677600860596
     Saved: ~
 Window Geometry:
   Displays:
