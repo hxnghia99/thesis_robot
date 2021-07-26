@@ -1,7 +1,7 @@
 <launch>
   <!-- Arguments -->
   <arg name="map_file" default="$(find robot_navigation)/maps/map.yaml"/>
-  <arg name="open_rviz" default="true"/>
+  <arg name="open_rviz" default="false"/>
   <arg name="move_forward_only" default="true"/>
 
   <include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/>

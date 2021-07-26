@@ -43,7 +43,8 @@
     
 #include <laser_scan_matcher/laser_scan_matcher_odom.h>
 #include <pcl_conversions/pcl_conversions.h>
-    
+#include <math.h>
+
 namespace scan_tools
 {
     
@@ -465,9 +466,21 @@ void LaserScanMatcher::processScan(LDP& curr_ldp_scan, const ros::Time& time)
                         double x_new  = (x + pr_ch_x) + alpha_ * r_x;
                         double y_new  = (y + pr_ch_y) + alpha_ * r_y;
                         double a_new  = (a + pr_ch_a) + alpha_ * r_a;
-    
-                        createTfFromXYTheta(x_new, y_new, a_new, w2b_);
-    
+                        
+                        ROS_INFO("x= %.6f, y= %.6f, a= %.6f \n x= %.6f, y= %.6f, a= %.6f \n", x_new, y_new, a_new, old_x, old_y, old_a);
+                        if(abs(old_x - x_new) < 0.5) // || (old_x - x_new) < 0.5*old_x)
+                        if(abs(old_y - y_new) < 0.5) // || (old_y - y_new) < 0.5*old_y)
+                        if(abs(old_a - a_new) < 0.1 || (old_a <0 && a_new>0 && abs(old_a - a_new) >5 && abs(old_a - a_new) <7) || (old_a >0 && a_new<0 && abs(old_a - a_new) >5 && abs(old_a - a_new) <7)) // || (old_a - a_new) < 0.5*old_a)
+                        {
+                                createTfFromXYTheta(x_new, y_new, a_new, w2b_);
+                                old_x = x_new;
+                                old_y = y_new;
+                                old_a = a_new;
+                        }
+                                
+
+                        
+
                         if (dt != 0.0)
                         {
                                 v_x_ = v_x_ + (beta_ / dt) * r_x;

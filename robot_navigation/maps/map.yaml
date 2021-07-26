@@ -1,4 +1,4 @@
-image: /home/hxnghia/catkin_ws/src/thesis_robot/robot_navigation/maps/map.pgm
+image: /home/thesis/catkin_ws/src/thesis_robot/robot_navigation/maps/map.pgm
 resolution: 0.050000
 origin: [-10.525000, -10.525000, 0.000000]
 negate: 0
