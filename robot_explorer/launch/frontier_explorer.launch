@@ -1,5 +1,5 @@
 <launch>
 
-    <include file="$(find robot_explorer)/launch/robot_prothemeus_frontier_explorer.launch"/>
+    <node pkg = "robot_explorer" type = "prometheus" name = "prometheus" output = "screen" launch-prefix="gnome-terminal --command"/>
 
 </launch>
