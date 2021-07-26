@@ -4,7 +4,7 @@
 
   <arg name="rviz"                default="false"/>  
   <arg name="rtabmapviz"          default="false"/>
-  <arg name="scan_matcher"        default="true"/>
+  <arg name="scan_matcher"        default="false"/>
   <arg name="gui_cfg"             default="~/.ros/rtabmap_gui.ini" />
 
   <arg name="database_path"       default="rtabmap.db"/>
@@ -66,6 +66,8 @@
 
   <!-- Robot remote and description -->
   <include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/>
+
+  <!-- Scan Matcher -->
   <include if="$(arg scan_matcher)" file="$(find thesis_robot_bringup)/launch/thesis_robot_scan_matcher.launch"/>
 
   <!-- Mapping -->
