@@ -1,0 +1,15 @@
+<launch>
+    <arg name="rviz"            default="false"/>
+    <arg name="map_file" default="$(find robot_navigation)/maps/map.yaml"/>
+  
+    <!-- Robot Description -->
+    <include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/>
+    
+    <!-- Map server -->
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+
+    <!-- amcl localization -->
+    <include file="(find robot_navigation)/launch/amcl.launch"/>
+
+    <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find robot_rtabmap)/rviz/robot_rtabmap.rviz"/>
+</launch>
