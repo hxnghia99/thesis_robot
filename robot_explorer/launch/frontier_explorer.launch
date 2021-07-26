@@ -1,0 +1,5 @@
+<launch>
+
+    <include file="$(find robot_explorer)/launch/robot_prothemeus_frontier_explorer.launch"/>
+
+</launch>
