@@ -3,6 +3,7 @@
   <arg name="slam_methods" default="hector" doc="slam type [gmapping, cartographer, hector, karto, frontier_exploration]"/>
   <arg name="configuration_basename" default="robot_lds_2d.lua"/>
   <arg name="open_rviz" default="false"/>
+  <arg name="scan_matcher"  default="true"/>
 
   <include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/>
 
@@ -11,7 +12,7 @@
   <include file="$(find robot_slam)/launch/robot_$(arg slam_methods).launch">
     <!--arg name="configuration_basename" value="$(arg configuration_basename)"/-->
   </include>
-
+  <include if="$(arg scan_matcher)" file="$(find thesis_robot_bringup)/launch/thesis_robot_scan_matcher.launch"/>
   <!-- Navigation parameters -->
   <arg name="odom_frame_id"   default="odom"/>
   <arg name="base_frame_id"   default="base_footprint"/>
