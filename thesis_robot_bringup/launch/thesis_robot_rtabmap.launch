@@ -70,6 +70,9 @@
   <!-- Robot remote and description -->
   <include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/>
 
+  <!-- Scan Matcher -->
+  <include if="$(arg scan_matcher)" file="$(find thesis_robot_bringup)/launch/thesis_robot_scan_matcher.launch"/>
+
   <!-- Mapping -->
   <group ns="rtabmap">
 

@@ -12,10 +12,7 @@
   <node unless="$(arg scan_matcher)" pkg="timed_roslaunch" type="timed_roslaunch.sh" name="Delay_rosseiral" args="5 thesis_robot_bringup thesis_robot_rosserial.launch" output="screen"/>
   
   <!--Delay rplidar-->
-  <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="Delay_rplidar" args="15 thesis_robot_bringup thesis_robot_rplidar.launch" output="screen"/>      
-
-  <!--Delay scan matcher-->
-  <node if="$(arg scan_matcher)" pkg="timed_roslaunch" type="timed_roslaunch.sh" name="Delay_scan_matcher" args="20 thesis_robot_bringup thesis_robot_scan_matcher.launch" output="screen"/>      
+  <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="Delay_rplidar" args="15 thesis_robot_bringup thesis_robot_rplidar.launch" output="screen"/>           
 
   <!-- Camera -->
   <include if="$(arg camera_enable)" file="$(find thesis_robot_bringup)/launch/thesis_robot_realsense.launch">
