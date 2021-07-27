@@ -9,7 +9,7 @@
   <arg name="scan_matcher"          default="false"/>
 
   <!--Delay rosserial-->
-  <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="Delay_rosseiral" args="5 thesis_robot_bringup thesis_robot_rosserial.launch" output="screen"/>
+  <node unless="$(arg scan_matcher)" pkg="timed_roslaunch" type="timed_roslaunch.sh" name="Delay_rosseiral" args="5 thesis_robot_bringup thesis_robot_rosserial.launch" output="screen"/>
   
   <!--Delay rplidar-->
   <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="Delay_rplidar" args="15 thesis_robot_bringup thesis_robot_rplidar.launch" output="screen"/>      
