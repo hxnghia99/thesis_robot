@@ -41,7 +41,7 @@
   <arg name="laser_topic" default="scan" />
   <arg name="custom_param_file" default="$(find robot_navigation)/param/dummy.yaml"/>
 
-  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+  <!--node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <rosparam file="$(find thesis_robot_bringup)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find thesis_robot_bringup)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />   
     <rosparam file="$(find thesis_robot_bringup)/param/local_costmap_params.yaml" command="load" />   
@@ -62,7 +62,10 @@
 
     <remap from="odom" to="$(arg odom_topic)"/>
     <remap from="scan" to="$(arg laser_topic)"/>
-  </node>
+  </node-->
+
+  <!-- Navigation parameters -->
+  <include file="$(find robot_navigation)/launch/includes/rtab_move_base.launch.xml"/>  
 
   <!-- Robot remote and description -->
   <include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/>
