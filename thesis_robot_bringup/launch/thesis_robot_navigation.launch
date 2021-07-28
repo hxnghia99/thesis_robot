@@ -3,8 +3,11 @@
   <arg name="map_file" default="$(find robot_navigation)/maps/map.yaml"/>
   <arg name="open_rviz" default="false"/>
   <arg name="move_forward_only" default="true"/>
+  <arg name="scan_matcher"      default="false"/>
 
   <include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/>
+
+  <include if="$(arg scan_matcher)" file="$(find thesis_robot_bringup)/launch/thesis_robot_scan_matcher.launch"/>
 
   <!-- Map server -->
   <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
