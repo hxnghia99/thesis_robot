@@ -273,7 +273,7 @@ Visualization Manager:
           Topic: /move_base/TrajectoryPlannerROS/global_plan
           Unreliable: false
           Value: true
-      Enabled: false
+      Enabled: true
       Name: Global Map
     - Class: rviz/Group
       Displays:
@@ -310,7 +310,7 @@ Visualization Manager:
           Topic: /move_base/TrajectoryPlannerROS/local_plan
           Unreliable: false
           Value: true
-      Enabled: false
+      Enabled: true
       Name: Local Map
     - Alpha: 1
       Arrow Length: 0.20000000298023224
