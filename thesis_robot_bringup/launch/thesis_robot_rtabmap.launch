@@ -2,8 +2,6 @@
   
   <node name="camera_color_optical" pkg="tf" type="static_transform_publisher" args="0 0 0.285 1.57 3.14 1.57 /base_link /camera_color_optical_frame 100"/>
 
-  <arg name="configuration_basename" default="robot_lds_2d.lua"/>
-
   <arg name="rviz"                default="false"/>  
   <arg name="rtabmapviz"          default="false"/>
   <arg name="scan_matcher"        default="false"/>
