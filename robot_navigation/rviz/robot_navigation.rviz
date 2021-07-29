@@ -361,7 +361,7 @@ Visualization Manager:
       Axes Radius: 0.009999999776482582
       Class: rviz/PoseArray
       Color: 0; 192; 0
-      Enabled: true
+      Enabled: false
       Head Length: 0.07000000029802322
       Head Radius: 0.029999999329447746
       Name: Amcl Particles
@@ -370,7 +370,7 @@ Visualization Manager:
       Shape: Arrow (Flat)
       Topic: /particlecloud
       Unreliable: false
-      Value: true
+      Value: false
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.10000000149011612
@@ -410,16 +410,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rtabmap_ros/OrbitOriented
-      Distance: 5.053782939910889
+      Distance: 6.069525718688965
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.10562222450971603
-        Y: 0.17753994464874268
-        Z: -0.041650403290987015
+        X: 0.3608592748641968
+        Y: -0.7736123204231262
+        Z: -0.03770630806684494
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
@@ -428,7 +428,7 @@ Visualization Manager:
       Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
       Value: OrbitOriented (rtabmap_ros)
-      Yaw: 3.1331846714019775
+      Yaw: 3.238187074661255
     Saved: ~
 Window Geometry:
   Displays:
@@ -449,4 +449,4 @@ Window Geometry:
     collapsed: false
   Width: 1507
   X: 237
-  Y: 163
+  Y: 133

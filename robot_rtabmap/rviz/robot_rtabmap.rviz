@@ -175,8 +175,6 @@ Visualization Manager:
           odom:
             base_footprint:
               base_link:
-                camera_color_optical_frame:
-                  {}
                 caster_wheel_link:
                   {}
                 imu_link:
@@ -187,6 +185,8 @@ Visualization Manager:
                   {}
                 realsense_link:
                   camera_color_frame:
+                    {}
+                  camera_color_optical_frame:
                     {}
                   camera_depth_frame:
                     {}
@@ -318,7 +318,7 @@ Visualization Manager:
       Axes Radius: 0.009999999776482582
       Class: rviz/PoseArray
       Color: 0; 192; 0
-      Enabled: true
+      Enabled: false
       Head Length: 0.07000000029802322
       Head Radius: 0.029999999329447746
       Name: Amcl Particles
@@ -327,7 +327,7 @@ Visualization Manager:
       Shape: Arrow (Flat)
       Topic: /particlecloud
       Unreliable: false
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
