@@ -1,6 +1,7 @@
 <launch>
     <arg name="rviz"            default="false"/>
     <arg name="map_file" default="$(find robot_navigation)/maps/map.yaml"/>
+    <arg name="global_loc"      default="true"/>
   
     <!-- Robot Description -->
     <include file="$(find thesis_robot_bringup)/launch/thesis_robot_remote.launch"/>
@@ -11,7 +12,7 @@
     <!-- amcl localization -->
     <include file="$(find robot_navigation)/launch/amcl.launch"/>
 
-    <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="delay_service_global_loc" args="2 thesis_robot_bringup thesis_robot_call_global_localization.launch" output="screen"/>
+    <node if="$(arg global_loc)" pkg="timed_roslaunch" type="timed_roslaunch.sh" name="delay_service_global_loc" args="2 thesis_robot_bringup thesis_robot_call_global_localization.launch" output="screen"/>
 
     <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find robot_rtabmap)/rviz/robot_rtabmap.rviz"/>
 </launch>
