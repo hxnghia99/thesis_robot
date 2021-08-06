@@ -1,7 +1,7 @@
 <launch>
     <arg name="mapping"        default="true"/>
 
-    <node if="$(arg mapping)"  pkg="rviz" type="rviz" name="rtab_view" required="true" args="-d $(find robot_rtabmap)/rviz/robot_rtabmap.rviz"/>
+    <node if="$(arg mapping)"  pkg="rviz" type="rviz" name="rtab_view" required="true" args="-d $(find thesis_robot_bringup)/rviz/robot_rtabmap.rviz"/>
 
-    <node unless="$(arg mapping)" pkg="rviz" type="rviz" name="navigate_view" required="true" args="-d $(find robot_navigation)/rviz/robot_navigation.rviz"/>
+    <node unless="$(arg mapping)" pkg="rviz" type="rviz" name="navigate_view" required="true" args="-d $(find thesis_robot_bringup)/rviz/robot_navigation.rviz"/>
 </launch>
