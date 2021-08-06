@@ -2,6 +2,7 @@
   <!-- Arguments -->
   <arg name="map_file" default="$(find robot_navigation)/maps/map.yaml"/>
   <arg name="open_rviz" default="false"/>
+  <arg name="move_forward_only" default="false"/>
   <arg name="scan_matcher"      default="false"/>
   <arg name="global_loc"        default="true"/>
 
@@ -63,11 +64,8 @@
   <arg name="odom_frame_id"   default="odom"/>
   <arg name="base_frame_id"   default="base_footprint"/>
   <arg name="global_frame_id" default="map"/>
-  <arg name="map_topic" default="map"/>
-  <arg name="odom_topic" default="odom"/>
-  <arg name="laser_topic" default="scan"/>
-  <arg name="cmd_vel_topic" default="cmd_vel"/>
-  <arg name="move_forward_only" default="false"/>
+  <!--arg name="odom_topic" default="odom"/-->
+  <arg name="laser_topic" default="scan" />
 
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
@@ -87,11 +85,31 @@
     <param name="DWAPlannerROS/global_frame_id" value="$(arg odom_frame_id)"/>
     <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
 
-    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
-    <remap from="map" to="$(arg map_topic)" />
-    <remap from="odom" to="$(arg odom_topic)"/>
+    <remap from="odom" to="odom"/>
     <remap from="scan" to="$(arg laser_topic)"/>
   </node>
+
+
+  <!-- Arguments -->
+    <arg name="map_topic" default="map" />
+    <arg name="cmd_vel_topic" default="cmd_vel" />
+    <arg name="odom_topic" default="/odom" />
+
+    <!-- move_base -->
+    <!--node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+      <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+      <rosparam file="$(find robot_navigation)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find robot_navigation)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+      <rosparam file="$(find robot_navigation)/param/local_costmap_params.yaml" command="load" />
+      <rosparam file="$(find robot_navigation)/param/global_costmap_params.yaml" command="load" />
+      <rosparam file="$(find robot_navigation)/param/move_base_params.yaml" command="load" />
+      <rosparam file="$(find robot_navigation)/param/dwa_local_planner_params.yaml" command="load" />
+      <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+      <remap from="odom" to="$(arg odom_topic)"/>
+      <remap from="map" to="$(arg map_topic)" />
+      <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+    </node-->
+
 
 
   <node if="$(arg global_loc)" pkg="timed_roslaunch" type="timed_roslaunch.sh" name="delay_service_global_loc" args="12 thesis_robot_bringup thesis_robot_call_global_localization.launch" output="screen"/>
